@@ -9,14 +9,14 @@ class Artiste(models.Model):
 
 
 class Song(models.Model):
-    artiste = models.ForeignKey(Artiste)
     title = models.CharField(max_length=255)
     date_released = models.DateField()
     likes = models.IntegerField()
-    artiste_id = models.IntegerField()
+    artiste_id = models.ForeignKey('Artiste',
+                                   on_delete=models.RESTRICT,
+                                   null=True)
 
 
 class Lyric(models.Model):
-    song = models.ForeignKey(Song)
     content = models.TextField()
-    song_id = models.IntegerField()
+    song_id = models.ForeignKey('Song', on_delete=models.RESTRICT, null=True)
